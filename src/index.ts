@@ -1,6 +1,13 @@
-import { isPlainObject, uniq } from 'lodash-es';
+import startCase from 'lodash/startCase';
+import isPlainObject from 'lodash/isPlainObject';
+import uniq from 'lodash/uniq';
+import merge from 'lodash/merge';
 
-export const schemaGenerator = (data: any, seed = {}) => {
+export type GeneratorOptions = {
+  formatTitle?: boolean;
+};
+
+export const schemaGenerator = (data: any, options: GeneratorOptions = { formatTitle: true }) => {
   const getType = (o: any) => {
     if (o === null) {
       return 'string';
@@ -23,16 +30,23 @@ export const schemaGenerator = (data: any, seed = {}) => {
 
       for (const key in child) {
         const item = child[key];
+        const title = options.formatTitle ? startCase(key) : key;
         schema.properties[key] = {
-          title: key
+          title
         };
+
         parse(item, schema.properties[key]);
       }
     } else if (type === 'array') {
       schema.items = {};
       if (child.length) {
         const childsType = getType(child[0]);
-        parse(child[0], schema.items);
+
+        for (const c of child) {
+          const items = parse(c, {});
+          schema.items = merge({}, schema.items, items);
+        }
+
         if (childsType !== 'object') {
           schema.items.enum = uniq(child);
         }
@@ -44,5 +58,5 @@ export const schemaGenerator = (data: any, seed = {}) => {
     return schema;
   };
 
-  return parse(data, seed);
+  return parse(data, {});
 };

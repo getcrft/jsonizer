@@ -11,7 +11,7 @@ describe('Schema Generator', () => {
       required: [],
       properties: {
         baz: {
-          title: 'baz',
+          title: 'Baz',
           type: 'boolean',
           examples: [true]
         }
@@ -31,7 +31,7 @@ describe('Schema Generator', () => {
       required: [],
       properties: {
         baz: {
-          title: 'baz',
+          title: 'Baz',
           type: 'string',
           examples: ['bar']
         }
@@ -51,7 +51,7 @@ describe('Schema Generator', () => {
       required: [],
       properties: {
         baz: {
-          title: 'baz',
+          title: 'Baz',
           type: 'array',
           items: {
             type: 'string',
@@ -59,7 +59,7 @@ describe('Schema Generator', () => {
               'foo',
               'bar'
             ],
-            examples: ['foo']
+            examples: ['bar']
           }
         }
       }
@@ -68,7 +68,54 @@ describe('Schema Generator', () => {
     expect(result).toStrictEqual(expected);
   });
 
-  it('should handle object array', () => {
+  it('should handle multi object array', () => {
+    const result = schemaGenerator({
+      baz: [
+        {
+          address: '172.217.12.238'
+        },
+        {
+          email: 'austin@crft.app',
+          address: '172.217.12.239'
+        }
+      ]
+    });
+
+    const expected = {
+      type: 'object',
+      required: [],
+      properties: {
+        baz: {
+          title: 'Baz',
+          type: 'array',
+          items: {
+            type: 'object',
+            required: [],
+            properties: {
+              address: {
+                title: 'Address',
+                type: 'string',
+                examples: [
+                  '172.217.12.239'
+                ]
+              },
+              email: {
+                title: 'Email',
+                type: 'string',
+                examples: [
+                  'austin@crft.app'
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+
+    expect(result).toStrictEqual(expected);
+  });
+
+  it('should handle single object array', () => {
     const result = schemaGenerator({
       baz: [
         {
@@ -82,14 +129,14 @@ describe('Schema Generator', () => {
       required: [],
       properties: {
         baz: {
-          title: 'baz',
+          title: 'Baz',
           type: 'array',
           items: {
             type: 'object',
             required: [],
             properties: {
               bar: {
-                title: 'bar',
+                title: 'Bar',
                 type: 'boolean',
                 examples: [true]
               }
@@ -114,13 +161,13 @@ describe('Schema Generator', () => {
       required: [],
       properties: {
         baz: {
-          title: 'baz',
+          title: 'Baz',
           type: 'object',
           required: [],
           properties: {
             bar: {
               type: 'boolean',
-              title: 'bar',
+              title: 'Bar',
               examples: [true]
             }
           }
@@ -146,23 +193,23 @@ describe('Schema Generator', () => {
       required: [],
       properties: {
         baz: {
-          title: 'baz',
+          title: 'Baz',
           type: 'object',
           required: [],
           properties: {
             bar: {
               type: 'boolean',
-              title: 'bar',
+              title: 'Bar',
               examples: [true]
             },
             foo: {
-              title: 'foo',
+              title: 'Foo',
               type: 'object',
               required: [],
               properties: {
                 bar: {
                   type: 'boolean',
-                  title: 'bar',
+                  title: 'Bar',
                   examples: [true]
                 }
               }
@@ -190,22 +237,22 @@ describe('Schema Generator', () => {
       required: [],
       properties: {
         baz: {
-          title: 'baz',
+          title: 'Baz',
           type: 'object',
           required: [],
           properties: {
             bar: {
               type: 'boolean',
-              title: 'bar',
+              title: 'Bar',
               examples: [true]
             },
             foo: {
-              title: 'foo',
+              title: 'Foo',
               type: 'object',
               required: [],
               properties: {
                 bar: {
-                  title: 'bar',
+                  title: 'Bar',
                   type: 'array',
                   items: {
                     type: 'string',
@@ -213,7 +260,7 @@ describe('Schema Generator', () => {
                       'foo',
                       'bar'
                     ],
-                    examples: ['foo']
+                    examples: ['bar']
                   }
                 }
               }
