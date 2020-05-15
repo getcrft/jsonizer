@@ -2,6 +2,8 @@
 
 JSON Schema all the Objects! It works in the browser and Node.
 
+Checkout the [example](https://codesandbox.io/s/json-schema-izer-viems?file=/src/App.js) code sandbox.
+
 ## Usage
 
 Install:
