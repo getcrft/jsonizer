@@ -1,4 +1,4 @@
-# @crft/jsonizer
+# @getcrft/jsonizer
 
 JSON Schema all the Objects! It works in the browser and Node.
 
@@ -9,13 +9,13 @@ Checkout the [example](https://codesandbox.io/s/json-schema-izer-viems?file=/src
 Install:
 
 ```bash
-yarn add @crft/jsonizer
+yarn add @getcrft/jsonizer
 ```
 
 then call it like:
 
 ```js
-import { schemaGenerator } from '@crft/jsonizer';
+import { schemaGenerator } from '@getcrft/jsonizer';
 
 const result = schemaGenerator({
   bacon: true

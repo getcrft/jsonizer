@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "license": "MIT",
-  "name": "@crft/jsonizer",
+  "name": "@getcrft/jsonizer",
   "author": "CRFT",
   "private": false,
   "module": "dist/jsonizer.esm.js",
@@ -28,6 +28,9 @@
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "lodash": "^4.17.15"
