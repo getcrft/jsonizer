@@ -3,7 +3,7 @@ import { schemaGenerator } from '../src';
 describe('Schema Generator', () => {
   it('should handle boolean', () => {
     const result = schemaGenerator({
-      baz: true
+      baz: true,
     });
 
     const expected = {
@@ -13,17 +13,17 @@ describe('Schema Generator', () => {
         baz: {
           title: 'Baz',
           type: 'boolean',
-          examples: [true]
-        }
-      }
-    }
+          examples: [true],
+        },
+      },
+    };
 
     expect(result).toStrictEqual(expected);
   });
 
   it('should handle string', () => {
     const result = schemaGenerator({
-      baz: 'bar'
+      baz: 'bar',
     });
 
     const expected = {
@@ -33,17 +33,17 @@ describe('Schema Generator', () => {
         baz: {
           title: 'Baz',
           type: 'string',
-          examples: ['bar']
-        }
-      }
-    }
+          examples: ['bar'],
+        },
+      },
+    };
 
     expect(result).toStrictEqual(expected);
   });
 
   it('should handle string array', () => {
     const result = schemaGenerator({
-      baz: ['foo', 'bar']
+      baz: ['foo', 'bar'],
     });
 
     const expected = {
@@ -55,15 +55,12 @@ describe('Schema Generator', () => {
           type: 'array',
           items: {
             type: 'string',
-            enum: [
-              'foo',
-              'bar'
-            ],
-            examples: ['bar']
-          }
-        }
-      }
-    }
+            enum: ['foo', 'bar'],
+            examples: ['bar'],
+          },
+        },
+      },
+    };
 
     expect(result).toStrictEqual(expected);
   });
@@ -72,13 +69,13 @@ describe('Schema Generator', () => {
     const result = schemaGenerator({
       baz: [
         {
-          address: '172.217.12.238'
+          address: '172.217.12.238',
         },
         {
           email: 'austin@crft.app',
-          address: '172.217.12.239'
-        }
-      ]
+          address: '172.217.12.239',
+        },
+      ],
     });
 
     const expected = {
@@ -95,22 +92,18 @@ describe('Schema Generator', () => {
               address: {
                 title: 'Address',
                 type: 'string',
-                examples: [
-                  '172.217.12.239'
-                ]
+                examples: ['172.217.12.239'],
               },
               email: {
                 title: 'Email',
                 type: 'string',
-                examples: [
-                  'austin@crft.app'
-                ]
-              }
-            }
-          }
-        }
-      }
-    }
+                examples: ['austin@crft.app'],
+              },
+            },
+          },
+        },
+      },
+    };
 
     expect(result).toStrictEqual(expected);
   });
@@ -119,9 +112,9 @@ describe('Schema Generator', () => {
     const result = schemaGenerator({
       baz: [
         {
-          bar: true
-        }
-      ]
+          bar: true,
+        },
+      ],
     });
 
     const expected = {
@@ -138,13 +131,13 @@ describe('Schema Generator', () => {
               bar: {
                 title: 'Bar',
                 type: 'boolean',
-                examples: [true]
-              }
-            }
-          }
-        }
-      }
-    }
+                examples: [true],
+              },
+            },
+          },
+        },
+      },
+    };
 
     expect(result).toStrictEqual(expected);
   });
@@ -152,8 +145,8 @@ describe('Schema Generator', () => {
   it('should handle simple nested', () => {
     const result = schemaGenerator({
       baz: {
-        bar: true
-      }
+        bar: true,
+      },
     });
 
     const expected = {
@@ -168,11 +161,11 @@ describe('Schema Generator', () => {
             bar: {
               type: 'boolean',
               title: 'Bar',
-              examples: [true]
-            }
-          }
-        }
-      }
+              examples: [true],
+            },
+          },
+        },
+      },
     };
 
     expect(result).toStrictEqual(expected);
@@ -183,9 +176,9 @@ describe('Schema Generator', () => {
       baz: {
         bar: true,
         foo: {
-          bar: true
-        }
-      }
+          bar: true,
+        },
+      },
     });
 
     const expected = {
@@ -200,7 +193,7 @@ describe('Schema Generator', () => {
             bar: {
               type: 'boolean',
               title: 'Bar',
-              examples: [true]
+              examples: [true],
             },
             foo: {
               title: 'Foo',
@@ -210,13 +203,13 @@ describe('Schema Generator', () => {
                 bar: {
                   type: 'boolean',
                   title: 'Bar',
-                  examples: [true]
-                }
-              }
-            }
-          }
-        }
-      }
+                  examples: [true],
+                },
+              },
+            },
+          },
+        },
+      },
     };
 
     expect(result).toStrictEqual(expected);
@@ -227,9 +220,9 @@ describe('Schema Generator', () => {
       baz: {
         bar: true,
         foo: {
-          bar: ['foo', 'bar']
-        }
-      }
+          bar: ['foo', 'bar'],
+        },
+      },
     });
 
     const expected = {
@@ -244,7 +237,7 @@ describe('Schema Generator', () => {
             bar: {
               type: 'boolean',
               title: 'Bar',
-              examples: [true]
+              examples: [true],
             },
             foo: {
               title: 'Foo',
@@ -256,18 +249,15 @@ describe('Schema Generator', () => {
                   type: 'array',
                   items: {
                     type: 'string',
-                    enum: [
-                      'foo',
-                      'bar'
-                    ],
-                    examples: ['bar']
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+                    enum: ['foo', 'bar'],
+                    examples: ['bar'],
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
     };
 
     expect(result).toStrictEqual(expected);

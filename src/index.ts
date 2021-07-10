@@ -7,7 +7,10 @@ export type GeneratorOptions = {
   formatTitle?: boolean;
 };
 
-export const schemaGenerator = (data: any, options: GeneratorOptions = { formatTitle: true }) => {
+export const schemaGenerator = (
+  data: any,
+  options: GeneratorOptions = { formatTitle: true }
+) => {
   const getType = (o: any) => {
     if (o === null) {
       return 'string';
@@ -32,7 +35,7 @@ export const schemaGenerator = (data: any, options: GeneratorOptions = { formatT
         const item = child[key];
         const title = options.formatTitle ? startCase(key) : key;
         schema.properties[key] = {
-          title
+          title,
         };
 
         parse(item, schema.properties[key]);
