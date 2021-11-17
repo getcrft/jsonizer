@@ -262,4 +262,23 @@ describe('Schema Generator', () => {
 
     expect(result).toStrictEqual(expected);
   });
+
+  it('should handle formatting the title', () => {
+    const formatTitle = (key: string) => `New Title - ${key}`;
+    const result = schemaGenerator({ baz: true }, { formatTitle });
+
+    const expected = {
+      type: 'object',
+      required: [],
+      properties: {
+        baz: {
+          title: 'New Title - baz',
+          type: 'boolean',
+          examples: [true],
+        },
+      },
+    };
+
+    expect(result).toStrictEqual(expected);
+  });
 });
