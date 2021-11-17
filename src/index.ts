@@ -4,13 +4,10 @@ import uniq from 'lodash/uniq';
 import merge from 'lodash/merge';
 
 export type GeneratorOptions = {
-  formatTitle?: boolean;
+  formatTitle?: (key: string) => string;
 };
 
-export const schemaGenerator = (
-  data: any,
-  options: GeneratorOptions = { formatTitle: true }
-) => {
+export const schemaGenerator = (data: any, options?: GeneratorOptions) => {
   const getType = (o: any) => {
     if (o === null) {
       return 'string';
@@ -33,7 +30,9 @@ export const schemaGenerator = (
 
       for (const key in child) {
         const item = child[key];
-        const title = options.formatTitle ? startCase(key) : key;
+        const title = options?.formatTitle
+          ? options.formatTitle(key)
+          : startCase(key);
         schema.properties[key] = {
           title,
         };
